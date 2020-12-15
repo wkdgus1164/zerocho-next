@@ -1,6 +1,6 @@
 import * as PropTypes from "prop-types";
 import Link from "next/link";
-import {Input, Menu, Row, Col} from 'antd';
+import {Col, Input, Menu, Row} from 'antd';
 import {useState} from 'react';
 import styled from 'styled-components';
 
@@ -38,7 +38,10 @@ const AppLayout = ({children}) => {
                     {children}
                 </Col>
                 <Col xs={24} md={6}>
-                    <a href="https://www.zerocho.com" target="_blank" rel="noreferrer noopener">Made by ZeroCho</a>
+                    <a
+                        href="https://www.zerocho.com"
+                        target="_blank"
+                        rel="noreferrer noopener">Made by ZeroCho</a>
                 </Col>
             </Row>
             {children}
