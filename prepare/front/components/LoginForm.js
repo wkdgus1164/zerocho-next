@@ -7,20 +7,31 @@ const ButtonWrapper = styled.div`
     margin-top: 10px;
 `;
 
-const LoginForm = () => {
+const FormWrapper = styled(Form)`
+    padding: 10px;
+`;
+
+const LoginForm = ({setIsLoggedIn}) => {
+
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
 
     const onChangeId = useCallback(e => {
         setId(e.target.value);
-    }, [])
+    }, []);
 
     const onChangePassword = useCallback(e => {
         setPassword(e.target.value);
-    }, [])
+    }, []);
+
+    const onSubmitForm = useCallback(() => {
+        console.log(id, password);
+        setIsLoggedIn(true);
+    }, []);
 
     return (
-        <Form>
+        <FormWrapper
+            onFinish={onSubmitForm}>
             <div>
                 <label
                     htmlFor="user-id">
@@ -60,7 +71,7 @@ const LoginForm = () => {
                     </a>
                 </Link>
             </ButtonWrapper>
-        </Form>
+        </FormWrapper>
     )
 }
 
