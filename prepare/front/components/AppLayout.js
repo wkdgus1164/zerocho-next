@@ -32,8 +32,7 @@ const AppLayout = ({children}) => {
                     </Link>
                 </Menu.Item>
                 <Menu.Item>
-                    <SearchInput
-                        enterButton/>
+                    <SearchInput enterButton/>
                 </Menu.Item>
                 <Menu.Item>
                     <Link
@@ -42,28 +41,18 @@ const AppLayout = ({children}) => {
                     </Link>
                 </Menu.Item>
             </Menu>
-            <Row
-                gutter={8}>
-                <Col
-                    xs={24}
-                    md={6}
-                >
+            <Row gutter={8}>
+                <Col xs={24} md={6}>
                     {isLoggedIn ?
                         <UserProfile
                             setIsLoggedIn={setIsLoggedIn}/> :
                         <LoginForm
                             setIsLoggedIn={setIsLoggedIn}/>}
                 </Col>
-                <Col
-                    xs={24}
-                    md={12}
-                >
+                <Col xs={24} md={12}>
                     {children}
                 </Col>
-                <Col
-                    xs={24}
-                    md={6}
-                >
+                <Col xs={24} md={6}>
                     <a
                         href="https://zerocho.com"
                         target="_blank"
