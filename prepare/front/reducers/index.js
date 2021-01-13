@@ -4,14 +4,6 @@ import {combineReducers} from "redux";
 import user from './user';
 import post from './post';
 
-const changeNickname = data => {
-    return {
-        type: 'CHANGE_NICKNAME',
-        data
-    }
-}
-
-changeNickname('boogicho');
 
 const rootReducer = combineReducers({
     index: (state = {}, action) => {
