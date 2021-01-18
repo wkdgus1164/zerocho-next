@@ -12,6 +12,10 @@ const initialState = {
             src: 'http://placehold.it/100x100'
         }, {
             src: 'http://placehold.it/100x100'
+        }, {
+            src: 'http://placehold.it/100x100'
+        }, {
+            src: 'http://placehold.it/100x100'
         }],
         Comments: [{
             User: {
