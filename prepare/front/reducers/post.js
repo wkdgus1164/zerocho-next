@@ -7,15 +7,11 @@ const initialState = {
         },
         content: '첫 번째 게시글 #해시태그 #익스프레스',
         Images: [{
-            src: 'http://placehold.it/100x100'
+            src: 'https://pbs.twimg.com/media/EIlWXnoUEAAM7cy?format=jpg&name=large'
         }, {
-            src: 'http://placehold.it/100x100'
+            src: 'https://t1.daumcdn.net/cfile/tistory/99A219465DBAE16213'
         }, {
-            src: 'http://placehold.it/100x100'
-        }, {
-            src: 'http://placehold.it/100x100'
-        }, {
-            src: 'http://placehold.it/100x100'
+            src: 'https://pbs.twimg.com/media/EK5jJ41XUAAMuX_?format=jpg&name=4096x4096'
         }],
         Comments: [{
             User: {
