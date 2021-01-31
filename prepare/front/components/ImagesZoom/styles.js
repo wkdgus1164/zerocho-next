@@ -1,5 +1,5 @@
-import styled, {createGlobalStyle} from "styled-components";
-import {CloseOutlined} from "@ant-design/icons";
+import styled, {createGlobalStyle} from 'styled-components';
+import {CloseOutlined} from '@ant-design/icons';
 
 export const Overlay = styled.div`
     position: fixed;
@@ -13,7 +13,7 @@ export const Overlay = styled.div`
 export const Header = styled.header`
     height: 44px;
     background: white;
-    position: relative;
+    position: relative;e
     padding: 0;
     text-align: center;
     
