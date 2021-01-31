@@ -56,15 +56,17 @@ const reducer = (state = initialState, action) => {
     case LOG_IN_REQUEST:
       return {
         ...state,
-        logInComplete: true,
+        logInComplete: false,
+        logInLoading: true,
         logInError: null,
         loginDone: false,
       };
     case LOG_IN_SUCCESS:
       return {
         ...state,
-        logInComplete: false,
-        logInLoading: true,
+        logInComplete: true,
+        logInLoading: false,
+        loginDone: true,
         me: dummyUser(action.data),
       };
     case LOG_IN_FAILURE:
