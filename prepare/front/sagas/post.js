@@ -2,7 +2,7 @@ import {all, delay, fork, put, takeLatest} from 'redux-saga/effects';
 import axios from 'axios';
 import {
   ADD_COMMENT_FAILURE,
-  ADD_COMMENT_REQUEST,
+  ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS,
   ADD_POST_FAILURE,
   ADD_POST_REQUEST,
   ADD_POST_SUCCESS,
@@ -18,7 +18,7 @@ function* addPost(action) {
     yield delay(1000);
     yield put({
       type: ADD_POST_SUCCESS,
-      // data: result.data,
+      data: action.data,
     });
   } catch (e) {
     yield put({
@@ -37,8 +37,8 @@ function* addComment(action) {
     // const result = yield call(addPostAPI, action.data);
     yield delay(1000);
     yield put({
-      type: ADD_COMMENT_FAILURE,
-      // data: result.data,
+      type: ADD_COMMENT_SUCCESS,
+      data: action.data,
     });
   } catch (e) {
     yield put({

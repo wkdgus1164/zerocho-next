@@ -3,13 +3,14 @@ import {Button, Form, Input} from 'antd';
 import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from 'react-redux';
 import useInput from '../hooks/useInput';
-import {ADD_COMMENT_REQUEST} from '../reducers/post';
+import {ADD_COMMENT_REQUEST, addComment} from '../reducers/post';
 
 const CommentForm = ({post}) => {
   const dispatch = useDispatch();
 
   const id = useSelector(state => state.user.me?.id);
   const addCommentDone = useSelector(state => state.user.me?.addCommentDone);
+  const addCommentLoading = useSelector(state => state.user.me?.addCommentLoading);
   const [commentText, onChangeCommentText, setCommentText] = useInput('');
 
   useEffect(() => {
@@ -31,9 +32,10 @@ const CommentForm = ({post}) => {
       <Form.Item style={{position: 'relative', margin: 0}}>
         <Input.TextArea value={commentText} onChange={onChangeCommentText} rows={4}/>
         <Button
-          style={{position: 'relative', right: 0, bottom: -40}}
+          style={{position: 'absolute', right: 0, bottom: -40, zIndex: 1}}
           type="primary"
           htmlType="submit"
+          loading={addCommentLoading}
         >
           삐약
         </Button>
