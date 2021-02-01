@@ -3,36 +3,12 @@ import produce from 'immer';
 import faker from 'faker';
 
 const initialState = {
-  mainPosts: [{
-    id: 1,
-    User: {
-      id: 1,
-      nickname: '제로초',
-    },
-    content: '첫 번째 게시글 #해시태그 #익스프레스',
-    Images: [{
-      src: 'https://pbs.twimg.com/media/EIlWXnoUEAAM7cy?format=jpg&name=large',
-    }, {
-      src: 'https://t1.daumcdn.net/cfile/tistory/99A219465DBAE16213',
-    }, {
-      src: 'https://pbs.twimg.com/media/EK5jJ41XUAAMuX_?format=jpg&name=4096x4096',
-    }],
-    Comments: [{
-      id: shortId.generate(),
-      User: {
-        id: shortId.generate(),
-        nickname: 'nero',
-      },
-      content: '우와 개정판이 나왔군요~',
-    }, {
-      id: shortId.generate(),
-      User: {
-        nickname: 'nero',
-      },
-      content: '우와 개정판이 나왔군요~',
-    }],
-  }],
+  mainPosts: [],
   imagePaths: [],
+  hasMorePost: true,
+  loadPostLoading: false,
+  loadPostDone: false,
+  loadPostError: null,
   addPostLoading: false,
   addPostDone: false,
   addPostError: null,
@@ -44,26 +20,30 @@ const initialState = {
   addCommentError: null,
 };
 
-initialState.mainPosts = initialState.mainPosts.concat(
-  Array(20).fill().map(() => ({
+export const generateDummyPost = number => Array(20).fill().map(() => ({
+  id: shortId.generate(),
+  User: {
     id: shortId.generate(),
+    nickname: faker.name.findName(),
+  },
+  content: faker.lorem.paragraph(),
+  Images: [{
+    src: faker.image.image(),
+  }],
+  Comments: [{
     User: {
       id: shortId.generate(),
       nickname: faker.name.findName(),
     },
-    content: faker.lorem.paragraph(),
-    Images: [{
-      src: faker.image.image(),
-    }],
-    Comments: [{
-      User: {
-        id: shortId.generate(),
-        nickname: faker.name.findName(),
-      },
-      content: faker.lorem.sentence(),
-    }],
-  })),
-);
+    content: faker.lorem.sentence(),
+  }],
+}));
+
+// initialState.mainPosts = initialState.mainPosts.concat(generateDummyPost(10));
+
+export const LOAD_POST_REQUEST = 'LOAD_POST_REQUEST';
+export const LOAD_POST_SUCCESS = 'LOAD_POST_SUCCESS';
+export const LOAD_POST_FAILURE = 'LOAD_POST_FAILURE';
 
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
@@ -109,6 +89,21 @@ const dummyComment = data => ({
 
 const reducer = (state = initialState, action) => produce(state, draft => {
   switch (action.type) {
+    case LOAD_POST_REQUEST:
+      draft.loadPostLoading = true;
+      draft.loadPostDone = false;
+      draft.loadPostError = null;
+      break;
+    case LOAD_POST_SUCCESS:
+      draft.loadPostLoading = false;
+      draft.loadPostDone = true;
+      draft.mainPosts = action.data.concat(draft.mainPosts);
+      draft.hasMorePost = draft.mainPosts.length < 50;
+      break;
+    case LOAD_POST_FAILURE:
+      draft.loadPostLoading = false;
+      draft.loadPostError = action.error;
+      break;
     case ADD_POST_REQUEST:
       draft.addPostLoading = true;
       draft.addPostDone = false;
