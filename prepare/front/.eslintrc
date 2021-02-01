@@ -35,6 +35,7 @@
     "arrow-parens": "off",
     "eol-last": "off",
     "react/prop-types": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "no-param-reassign": "off"
   }
 }
