@@ -32,7 +32,7 @@ const ImagesZoom = ({images, onClose}) => {
                   alt={v.src}
                 />
               </ImgWrapper>
-          ))}
+            ))}
           </Slick>
           <Indicator>
             <div>
