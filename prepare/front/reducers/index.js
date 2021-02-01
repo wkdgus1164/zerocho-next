@@ -8,7 +8,6 @@ const rootReducer = combineReducers({
   index: (state = {}, action) => {
     switch (action.type) {
       case HYDRATE:
-        console.log('HYDRATE');
         return state;
       default:
         return state;
