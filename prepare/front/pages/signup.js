@@ -1,9 +1,10 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Head from 'next/head';
 import {Button, Checkbox, Form, Input} from 'antd';
 import styled from 'styled-components';
 
 import {useDispatch, useSelector} from 'react-redux';
+import Router from 'next/router';
 import AppLayout from '../components/AppLayout';
 import useInput from '../hooks/useInput';
 import {SIGN_UP_REQUEST} from '../reducers/user';
@@ -14,7 +15,19 @@ const ErrorMessage = styled.div`
 
 const Signup = () => {
   const dispatch = useDispatch();
-  // const signUpLoading = useSelector(state => state.user.signUpLoading);
+  const {signUpLoading, signUpDone, signUpError} = useSelector(state => state.user);
+
+  useEffect(() => {
+    if (signUpDone) {
+      Router.push('/');
+    }
+  }, [signUpDone]);
+
+  useEffect(() => {
+    if (signUpError) {
+      alert(signUpError.data);
+    }
+  }, [signUpError]);
 
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
@@ -112,7 +125,7 @@ const Signup = () => {
           {termError && <ErrorMessage style={{color: 'red'}}>약관에 동의하셔야 합니다.</ErrorMessage>}
         </div>
         <div style={{marginTop: 10}}>
-          <Button type="primary" htmlType="submit">가입하기</Button>
+          <Button type="primary" htmlType="submit" loading={signUpLoading}>가입하기</Button>
         </div>
       </Form>
     </AppLayout>

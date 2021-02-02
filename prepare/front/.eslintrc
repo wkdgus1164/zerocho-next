@@ -36,6 +36,7 @@
     "eol-last": "off",
     "react/prop-types": "off",
     "react/require-default-props": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-alert": "off"
   }
 }
