@@ -111,7 +111,7 @@ const reducer = (state = initialState, action) => produce(state, draft => {
       draft.logInComplete = true;
       draft.logInLoading = false;
       draft.loginDone = true;
-      draft.me = dummyUser(action.data);
+      draft.me = action.data;
       break;
     case LOG_IN_FAILURE:
       draft.logInLoading = false;

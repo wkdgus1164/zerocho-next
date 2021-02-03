@@ -4,12 +4,24 @@ const passport = require('passport');
 const {User} = require('../models');
 const router = express.Router();
 
-router.post('/login', passport.authenticate('local', (e, user, info) => {
-  if (e) {
-    console.error(e);
-    next(e);
-  }
-}));
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (e, user, info) => {
+    if (e) {
+      console.error(e);
+      return next(e);
+    }
+    if (info) {
+      return res.status(401).send(info.reason);
+    }
+    return req.login(user, async loginErr => {
+      if (loginErr) {
+        console.error(loginErr);
+        return next(loginErr);
+      }
+      return res.status(200).json(user);
+    });
+  })(req, res, next);
+});
 
 router.post('/', async (req, res) => {
   try {

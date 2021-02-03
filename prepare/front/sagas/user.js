@@ -19,7 +19,7 @@ import {
 } from '../reducers/user';
 
 function logInAPI(data) {
-  return axios.post('/login', data);
+  return axios.post('/user/login', data);
 }
 
 function* logIn(action) {
@@ -58,7 +58,7 @@ function* logOut() {
 }
 
 function signUpAPI(data) {
-  return axios.post('/user/login', data);
+  return axios.post('/user', data);
 }
 
 function* signUp(action) {
